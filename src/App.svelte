@@ -1,89 +1,177 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from './assets/vite.svg'
-  import heroImg from './assets/hero.png'
-  import Counter from './lib/Counter.svelte'
+  import PlayerManager from './lib/PlayerManager.svelte';
+  import TournamentManager from './lib/TournamentManager.svelte';
+  import MatchSystem from './lib/MatchSystem.svelte';
+  import RankingLeaderboard from './lib/RankingLeaderboard.svelte';
+  import { playersStore, tournamentsStore, matchesStore } from './lib/store.js';
+
+  let activeTab = 'players'; // 'players' | 'tournaments' | 'matches' | 'rankings'
 </script>
 
-<section id="center">
-  <div class="hero">
-    <img src={heroImg} class="base" width="170" height="179" alt="" />
-    <img src={svelteLogo} class="framework" alt="Svelte logo" />
-    <img src={viteLogo} class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/App.svelte</code> and save to test <code>HMR</code></p>
-  </div>
-  <Counter />
-</section>
+<main class="app-container">
+  <!-- Navigation Header -->
+  <header class="navbar glass-card">
+    <div class="brand">
+      <div class="logo-icon">♟️</div>
+      <div>
+        <h1 class="brand-title">ChessArena</h1>
+        <span class="brand-subtitle">Tournament Management System</span>
+      </div>
+    </div>
 
-<div class="ticks"></div>
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button 
+        class="nav-btn {activeTab === 'players' ? 'active' : ''}" 
+        on:click={() => activeTab = 'players'}
+      >
+        <span class="tab-icon">♟️</span> Players
+        <span class="badge-count">{$playersStore.length}</span>
+      </button>
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true">
-      <use href="/icons.svg#documentation-icon"></use>
-    </svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank" rel="noreferrer">
-          <img class="logo" src={viteLogo} alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://svelte.dev/" target="_blank" rel="noreferrer">
-          <img class="button-icon" src={svelteLogo} alt="" />
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true">
-      <use href="/icons.svg#social-icon"></use>
-    </svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li>
-        <a href="https://github.com/vitejs/vite" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#github-icon"></use>
-          </svg>
-          GitHub
-        </a>
-      </li>
-      <li>
-        <a href="https://chat.vite.dev/" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#discord-icon"></use>
-          </svg>
-          Discord
-        </a>
-      </li>
-      <li>
-        <a href="https://x.com/vite_js" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#x-icon"></use>
-          </svg>
-          X.com
-        </a>
-      </li>
-      <li>
-        <a href="https://bsky.app/profile/vite.dev" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#bluesky-icon"></use>
-          </svg>
-          Bluesky
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
+      <button 
+        class="nav-btn {activeTab === 'tournaments' ? 'active' : ''}" 
+        on:click={() => activeTab = 'tournaments'}
+      >
+        <span class="tab-icon">🏆</span> Tournaments
+        <span class="badge-count">{$tournamentsStore.length}</span>
+      </button>
 
-<div class="ticks"></div>
-<section id="spacer"></section>
+      <button 
+        class="nav-btn {activeTab === 'matches' ? 'active' : ''}" 
+        on:click={() => activeTab = 'matches'}
+      >
+        <span class="tab-icon">🎲</span> Matches
+        <span class="badge-count">{$matchesStore.length}</span>
+      </button>
+
+      <button 
+        class="nav-btn {activeTab === 'rankings' ? 'active' : ''}" 
+        on:click={() => activeTab = 'rankings'}
+      >
+        <span class="tab-icon">🥇</span> Leaderboard
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main View Area -->
+  <section class="main-content">
+    {#if activeTab === 'players'}
+      <PlayerManager />
+    {:else if activeTab === 'tournaments'}
+      <TournamentManager />
+    {:else if activeTab === 'matches'}
+      <MatchSystem />
+    {:else if activeTab === 'rankings'}
+      <RankingLeaderboard />
+    {/if}
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>ChessArena • Chess Tournament Management System</p>
+    <p class="sub-footer">Built with Svelte & JavaScript for Bytelogik Technical Evaluation</p>
+  </footer>
+</main>
+
+<style>
+  .app-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 100vh;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .logo-icon {
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold) 0%, #d97706 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px var(--gold-glow);
+  }
+  .brand-title {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    line-height: 1.1;
+  }
+  .brand-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+  }
+  .nav-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 14px var(--primary-glow);
+  }
+  .badge-count {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.1rem 0.45rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+  }
+
+  .main-content {
+    flex: 1;
+  }
+
+  .footer {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-light);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+  .sub-footer {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+</style>
