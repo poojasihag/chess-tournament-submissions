@@ -158,19 +158,48 @@
     font-size: 0.75rem;
   }
 
+  @media (max-width: 768px) {
+    .app-container {
+      padding: 1rem 0.5rem 2rem 0.5rem;
+      gap: 1.25rem;
+    }
+    .navbar {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem;
+      gap: 0.85rem;
+    }
+    .brand {
+      justify-content: center;
+      text-align: center;
+    }
+    .nav-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+      width: 100%;
+    }
+    .nav-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 0.55rem 0.5rem;
+      font-size: 0.85rem;
+    }
+  }
+
   .main-content {
     flex: 1;
   }
 
   .footer {
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--border-light);
     color: var(--text-dim);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
   .sub-footer {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     margin-top: 0.2rem;
   }

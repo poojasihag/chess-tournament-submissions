@@ -349,4 +349,28 @@
 
   .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
   .empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+  @media (max-width: 640px) {
+    .header-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .header-actions {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+    .tourney-select {
+      width: 100%;
+    }
+    .matches-grid {
+      grid-template-columns: 1fr;
+    }
+    .action-buttons-wrap {
+      flex-direction: column;
+    }
+    .action-buttons-wrap .btn {
+      width: 100%;
+    }
+  }
 </style>

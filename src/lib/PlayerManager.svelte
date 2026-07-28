@@ -478,4 +478,32 @@
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
   }
+
+  @media (max-width: 640px) {
+    .header-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .controls-bar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.85rem;
+    }
+    .search-box {
+      min-width: 100%;
+    }
+    .filter-box {
+      justify-content: space-between;
+      width: 100%;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    .modal-content {
+      padding: 1.25rem;
+    }
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

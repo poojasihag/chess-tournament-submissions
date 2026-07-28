@@ -447,4 +447,17 @@
   .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
   .empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
   .modal-footer { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem; }
+
+  @media (max-width: 640px) {
+    .header-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .tournaments-grid {
+      grid-template-columns: 1fr;
+    }
+    .modal-content {
+      padding: 1.25rem;
+    }
+  }
 </style>

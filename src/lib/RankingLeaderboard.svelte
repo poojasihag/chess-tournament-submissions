@@ -291,4 +291,24 @@
 
   .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
   .empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    .header-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .tourney-select {
+      width: 100%;
+    }
+    .podium-section {
+      grid-template-columns: 1fr;
+    }
+    .gold-card {
+      order: -1;
+      transform: none;
+    }
+    .table-container {
+      overflow-x: auto;
+    }
+  }
 </style>
